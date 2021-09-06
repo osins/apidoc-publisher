@@ -22,7 +22,7 @@ coding-api-pub
 | ACCESS_USER | 字符串	| 用户id |	
 | ACCESS_TOKEN | 字符串 |	Token |	
 | APIDOC_TEAM | 字符串	| 团队id |	
-| APIDOC_PROJECT | 字符串 |	points-system	|
+| APIDOC_PROJECT | 字符串 |	项目名称（注意是和你的代码库一致的英文名称）	|
 | APIDOC_ID | 字符串	| API文档id |	
 | APIDOC_RELEASE_DOC | 字符串	| API文档在容器中的地址 | 	
 
