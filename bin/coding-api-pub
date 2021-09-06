@@ -1,0 +1,53 @@
+#!/bin/sh
+# Note: This is a shell to release api doc
+
+echo "api doc publisher api doc releasing ..."
+
+# Deal URL
+URL="api-docs/open/api/v1/projects"
+
+if [ -n "$APIDOC_HOST" ]; then
+    echo "api doc publisher unkown env 'APIDOC_HOST'"
+    exit 2
+elif [ -n "$APIDOC_TEAM" ]; then
+    APIDOC_HOST="https://$APIDOC_TEAM.coding.net"
+    URL="$APIDOC_HOST/$URL"
+else
+    echo "api doc publisher unkown env 'APIDOC_TEAM'"
+    exit 2
+fi
+
+if [ -n "$APIDOC_PROJECT" ]; then
+    URL="$URL/$APIDOC_PROJECT"
+else
+    echo "api doc publisher unkown env 'APIDOC_PROJECT'"
+    exit 2
+fi
+
+if [ -n "$APIDOC_ID" ]; then
+    URL="$URL/docs/$APIDOC_ID/releases"
+else
+    echo "api doc publisher unkown env 'APIDOC_ID'"
+    exit 2
+fi
+
+if [ -z "$ACCESS_TOKEN" ]; then
+    echo "api doc publisher unkown env 'ACCESS_TOKEN'"
+    exit 2
+fi
+
+if [ -z "$APIDOC_RELEASE_DOC" ]; then
+    echo "api doc publisher unkown env 'APIDOC_RELEASE_DOC'"
+    exit 2
+fi
+
+RESULT=$(curl -X POST -H "Authorization: token $ACCESS_TOKEN" -H "Accept:application/json" $URL -F "filename=@${APIDOC_RELEASE_DOC}")
+CODE=$(echo "$RESULT" | jq -r '.code')
+if [ "$CODE" = "0" ]; then
+    echo "api doc publisher api doc success: $RESULT"
+else
+    echo "api doc publisher api doc error: $RESULT"
+    exit 1
+fi
+
+echo "api doc publisher api doc released"

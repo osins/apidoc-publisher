@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  api-doc:
+    image: wangsying/apidoc-publisher
+    networks:
+      - net
+    dns: 
+      - 8.8.8.8
+    environment:
+      ACCESS_TOKEN: 20b291da5eb8c3b47534ac201e5d8175840fa9d8
+      APIDOC_TEAM: humanrisk
+      APIDOC_PROJECT: laravel7
+      APIDOC_ID: 1
+      APIDOC_RELEASE_DOC: /app/api-docs.json
+    working_dir: /app
+    volumes:
+      - ./:/app
+
+networks:
+  net:
+    ipam:
+      driver: default
