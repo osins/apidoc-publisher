@@ -10,6 +10,13 @@ coding.net api publisher / 腾讯coding.net的api生成工具容器镜像
 * 设置全局变量
 * 执行立即构建即可
 
+也可以阶段下添加一个脚本,指定执行coding-api-pub脚本生成api文档
+```bash
+pwd -P
+ls .
+coding-api-pub
+```
+
 | 全局变量 | 类型 | 解释 |
 | --- | ---	| --- |	
 | ACCESS_USER | 字符串	| 用户id |	
